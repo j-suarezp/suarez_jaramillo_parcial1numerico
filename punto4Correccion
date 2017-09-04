@@ -1,0 +1,78 @@
+#include <math.h>
+#include <iostream>
+
+using namespace std;
+
+double factorial(double n)
+{
+    if (n == 0)
+        return 1;
+    else
+        return (n * factorial(n-1));
+}
+
+double f1(double x)
+{
+    return (exp(x * -1));
+}
+
+double derivada1(int n, double x)
+{
+    if(n % 2 == 0)
+        return exp(x * -1);
+    else
+        return exp(x * -1) * -1;
+}
+
+double taylor1(double x, double a)
+{
+	double derivada, fact, term, totalSum;
+	totalSum = 0;
+	totalSum = f1(a);
+
+    for (int i = 1; i < 10; i++)	
+	{
+        derivada = derivada1(i,a);
+        fact = (i);
+        term = pow((x - a), i);
+        totalSum += (derivada * term) / fact;
+	}
+    return totalSum;
+}
+
+
+double f2(double x)
+{
+    return (exp(1 - x));
+}
+
+double deriv2(int n, double x)
+{
+    if(n % 2 == 0)
+        return exp((1 - x));
+    else
+        return (exp((1 - x)) * -1);
+}
+
+double taylor2(double x, double a)
+{
+	double derivada, fact, term, totalSum;
+	totalSum = 0;
+	totalSum = f2(a);
+
+    for (int i = 1; i < 10; i++)	
+	{
+        derivada = deriv2(i,a);
+        fact = (i);
+        term = pow((x - a), i);
+        totalSum += (derivada * term) / fact;
+	}
+    return totalSum;
+}
+
+int main()
+{
+	cout<<taylor1(5.0, 4.5)<<endl;
+	cout<<taylor2(6.0, 4.5)<<endl;
+	return 0;
+}
